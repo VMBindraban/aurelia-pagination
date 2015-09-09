@@ -1,0 +1,42 @@
+{
+  "name": "aurelia-pagination",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoloDev/aurelia-pagination.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YoloDev/aurelia-pagination/issues"
+  },
+  "homepage": "https://github.com/YoloDev/aurelia-pagination#readme",
+  "description": "",
+  "devDependencies": {
+    "browser-sync": "^2.9.3",
+    "core-js": "^1.1.4",
+    "del": "^2.0.2",
+    "event-stream": "^3.3.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-minify-css": "^1.2.1",
+    "jspm": "^0.16.2",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.2",
+    "vinyl-paths": "^2.0.0"
+  },
+  "jspm": {
+    "main": "index.js",
+    "format": "amd",
+    "directories": {
+      "lib": "dist/amd"
+    },
+    "dependencies": {
+      "aurelia-framework": "github:aurelia/framework@^0.16.0"
+    }
+  }
+}
