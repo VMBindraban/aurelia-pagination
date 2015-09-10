@@ -1,4 +1,5 @@
-import {customElement, processContent, bindable, noView, ViewSlot, ViewResources, ViewCompiler, inject, Container} from 'aurelia-framework';
+import { customElement, processContent, bindable, noView, ViewSlot,
+  ViewResources, ViewCompiler, inject, Container } from 'aurelia-framework';
 
 const _ready = Symbol('ready');
 const _counter = Symbol('counter');
@@ -19,7 +20,7 @@ export class Paginated {
     this[_ready] = false;
     this[_counter] = 0;
 
-    Object.defineProperty(this.model, 'page', {
+    Reflect.defineProperty(this.model, 'page', {
       enumerable: true,
       get: () => this.page,
       set: value => this.page = value
@@ -28,13 +29,12 @@ export class Paginated {
     const fragment = document.createDocumentFragment();
 
     let child;
+
     while ((child = element.firstElementChild) !== null) {
       fragment.appendChild(child);
     }
 
-    const viewFactory = viewCompiler.compile(fragment, viewResources);
-
-    this.viewFactory = viewFactory;
+    this.viewFactory = viewCompiler.compile(fragment, viewResources);
     this.container = container;
     this.viewSlot = viewSlot;
   }
@@ -42,7 +42,7 @@ export class Paginated {
   bind(ctx) {
     if (typeof this.pageSize === 'string') {
       const pageSize = this.pageSize;
-      this.pageSize = parseInt(this.pageSize);
+      this.pageSize = parseInt(this.pageSize, 10);
 
       if (isNaN(this.pageSize)) {
         throw new Error(`The string '${pageSize}' given to page-size is not a number.`);
@@ -83,7 +83,7 @@ export class Paginated {
         if (counter !== this[_counter]) {
           return;
         }
-        
+
         this.data = data;
         this.model.maxPage = maxPage;
         this.model.ready = true;
