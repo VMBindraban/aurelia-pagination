@@ -8,7 +8,7 @@ const _counter = Symbol('counter');
 @processContent(false)
 @customElement('paginated')
 @inject(ViewResources, ViewSlot, ViewCompiler, Container, Element)
-export class Paginated {
+export class PaginatedElement {
   @bindable fetch;
   @bindable pageSize = 10;
   @bindable page = 0;
@@ -71,6 +71,10 @@ export class Paginated {
     const view = this.viewFactory.create(this.container, childCtx);
     this.viewSlot.add(view);
     this[_ready] = true;
+    this._process();
+  }
+
+  pageChanged() {
     this._process();
   }
 

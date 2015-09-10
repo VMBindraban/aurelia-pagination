@@ -1,1 +1,2 @@
-export { Paginated } from './paginated.js';
+export { PaginatedElement } from './paginated.js';
+export { PaginationNavElement } from './pagination-nav.js';

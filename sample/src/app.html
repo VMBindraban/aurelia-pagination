@@ -3,7 +3,7 @@
   <h1>${title}</h1>
 
   <!-- This is ugly until https://github.com/aurelia/binding/issues/166 is fixed -->
-  <paginated fetch.call="getItems({ page: $event.$page, pageSize: $event.$pageSize })" page-size="5">
+  <paginated fetch.call="getItems({ page: $event.$page, pageSize: $event.$pageSize })" page-size="15">
     <table>
       <thead>
         <tr>
@@ -19,6 +19,26 @@
       </tbody>
     </table>
 
-    <pagination-nav model.bind="$model"></pagination-nav>
+    <pagination-nav model.bind="$model">
+      <table>
+        <tr>
+          <td>
+            <a href="#" click.trigger="$go(0)">&laquo;</a>
+          </td>
+          <td>
+            <a href="#" class="${ $isFirst ? 'disabled' : '' }" click.trigger="$go('prev')">&lsaquo;</a>
+          </td>
+          <td repeat.for="nav of $navs">
+            <a href="#" class="${ nav.current ? 'current' : '' }" click.delegate="nav.go()">${nav.text}</a>
+          </td>
+          <td>
+            <a href="#" class="${ $isLast ? 'disabled' : '' }" click.trigger="$go('next')">&rsaquo;</a>
+          </td>
+          <td>
+            <a href="#" click.trigger="$go(-1)">&raquo;</a>
+          </td>
+        </tr>
+      </table>
+    </pagination-nav>
   </paginated>
 </template>
