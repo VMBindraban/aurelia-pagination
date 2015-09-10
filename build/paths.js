@@ -7,6 +7,7 @@ var pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 module.exports = {
   root: appRoot,
   source: appRoot + '**/*.js',
+  sampleSource: 'sample/src/**/*.js',
   html: appRoot + '**/*.html',
   style: 'styles/**/*.css',
   output: 'dist',

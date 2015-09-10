@@ -5,7 +5,7 @@ var paths = require('../paths');
 
 // runs jshint on all .js files
 gulp.task('lint', function() {
-  return gulp.src(paths.source)
+  return gulp.src([paths.source, paths.sampleSource])
     // eslint() attaches the lint output to the eslint property
     // of the file object so it can be used by other modules.
     .pipe(eslint())

@@ -31,6 +31,6 @@ export class App {
     const endIndex = Math.min(startIndex + pageSize, data.length);
     const pageData = data.slice(startIndex, endIndex);
 
-    return { data: pageData, maxPage: maxPage };
+    return { data: pageData, maxPage };
   }
 }

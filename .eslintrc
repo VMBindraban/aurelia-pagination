@@ -127,7 +127,7 @@
     "eol-last": 1,
     "eqeqeq": 1,
     "func-names": 1,
-    "func-style": 1,
+    "func-style": [1, "declaration"],
     "generator-star-spacing": 0,
     "guard-for-in": 1,
     "handle-callback-err": 0,
