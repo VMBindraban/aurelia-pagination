@@ -1,8 +1,9 @@
 <template>
   <require from="aurelia-pagination"></require>
-  <h1>Pagination!</h1>
+  <h1>${title}</h1>
 
-  <paginated fetch.call="getItems({ page: $page, pageSize: $pageSize })" page-size="5">
+  <!-- This is ugly until https://github.com/aurelia/binding/issues/166 is fixed -->
+  <paginated fetch.call="getItems({ page: $event.$page, pageSize: $event.$pageSize })" page-size="5">
     <table>
       <thead>
         <tr>

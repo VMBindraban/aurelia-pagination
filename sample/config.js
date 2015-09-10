@@ -12,15 +12,17 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   packages: {
-    '/aurelia-pagination': {
-      main: 'index',
-      format: 'amd',
-      dependencies: {
+    "/aurelia-pagination": {
+      "main": "index",
+      "format": "amd",
+      "dependencies": {
         "aurelia-framework": "github:aurelia/framework@^0.16.0"
       }
     }
   },
+
   map: {
     "aurelia-bootstrapper": "github:aurelia/bootstrapper@0.17.0",
     "babel": "npm:babel-core@5.8.23",
