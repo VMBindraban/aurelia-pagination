@@ -1,7 +1,8 @@
 # aurelia-pagination
 
 ## Setup
-To set up locally (for development or testing) do
+To set up locally (for development or testing) do:
+
 1. `npm install`
 2. `gulp init`
 
