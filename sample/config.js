@@ -28,8 +28,11 @@ System.config({
     "babel": "npm:babel-core@5.8.23",
     "babel-runtime": "npm:babel-runtime@5.8.20",
     "core-js": "npm:core-js@1.1.4",
+    "css": "github:systemjs/plugin-css@0.1.16",
     "font-awesome": "npm:font-awesome@4.4.0",
+    "material-design-lite": "github:google/material-design-lite@1.0.4",
     "twbs/bootstrap": "github:twbs/bootstrap@3.3.5",
+    "whatwg-fetch": "npm:whatwg-fetch@0.9.0",
     "github:aurelia/binding@0.9.1": {
       "aurelia-dependency-injection": "github:aurelia/dependency-injection@0.10.1",
       "aurelia-metadata": "github:aurelia/metadata@0.8.0",

@@ -3,20 +3,28 @@
   <head>
     <title>Aurelia</title>
     <link rel="stylesheet" href="jspm_packages/npm/font-awesome@4.4.0/css/font-awesome.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-      .current {
-        color: red;
+      .pagination > li > a {
+        width: 45px;
+        text-align: center;
       }
-      .disabled {
-        color: green;
+
+      paginated, pagination-nav {
+        display: block;
+      }
+
+      pagination-nav nav {
+        text-align: center;
       }
     </style>
   </head>
-  <body aurelia-app="src/main">
-    <div class="splash">
-      <div class="message">The awesome stuffs of Alex and Andreas</div>
-      <i class="fa fa-spinner fa-spin"></i>
+  <body>
+    <div class="container" aurelia-app="src/main">
+      <div class="splash">
+        <div class="message">The awesome stuffs of Alex and Andreas</div>
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
     </div>
 
     <script src="jspm_packages/system.js"></script>

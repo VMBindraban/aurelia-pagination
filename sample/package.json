@@ -3,13 +3,21 @@
     "directories": {},
     "dependencies": {
       "aurelia-bootstrapper": "github:aurelia/bootstrapper@^0.17.0",
+      "css": "github:systemjs/plugin-css@^0.1.16",
       "font-awesome": "npm:font-awesome@^4.4.0",
-      "twbs/bootstrap": "github:twbs/bootstrap@3.3.5"
+      "material-design-lite": "github:google/material-design-lite@^1.0.4",
+      "twbs/bootstrap": "github:twbs/bootstrap@3.3.5",
+      "whatwg-fetch": "npm:whatwg-fetch@^0.9.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.22",
       "babel-runtime": "npm:babel-runtime@^5.8.20",
       "core-js": "npm:core-js@^1.1.0"
+    },
+    "overrides": {
+      "github:google/material-design-lite@1.0.4": {
+        "main": "material.js"
+      }
     }
   }
 }

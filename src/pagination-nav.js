@@ -7,7 +7,7 @@ import { customElement, processContent, bindable, noView, ViewSlot,
 @inject(ViewResources, ViewSlot, ViewCompiler, Container, ObserverLocator, Element)
 export class PaginationNavElement {
   @bindable model;
-  @bindable rangeSize = 5;
+  @bindable rangeSize = 3;
 
   navs = [];
   subscriptions = [];
@@ -57,18 +57,18 @@ export class PaginationNavElement {
                 break;
 
               case 'next':
-                if (this.model.page === this.model.maxPage) {
+                if (this.model.page === this.model.numPages - 1) {
                   return;
                 }
 
-                this.model.page = Math.min(this.model.page + 1, this.model.maxPage);
+                this.model.page = Math.min(this.model.page + 1, this.model.numPages);
                 break;
 
               default:
                 throw new Error(`'${num}' is not a valid value for $go`);
             }
           } else if (num < 0) {
-            this.model.page = this.model.maxPage + num + 1;
+            this.model.page = this.model.numPages + num;
           } else {
             this.model.page = num;
           }
@@ -76,7 +76,7 @@ export class PaginationNavElement {
       },
       $isLast: {
         get() {
-          return self.model.page === self.model.maxPage;
+          return self.model.page === self.model.numPages - 1;
         }
       },
       $isFirst: {
@@ -115,9 +115,25 @@ export class PaginationNavElement {
 
   _generate() {
     const navs = [];
-    const page = this.model.page;
+    const { page, numPages } = this.model;
 
-    for (let i = 0; i < this.model.maxPage + 1; i++) {
+    let rangeStart = Math.max(page - this.rangeSize, 0);
+    let rangeEnd = Math.min(page + this.rangeSize, numPages - 1);
+
+    if (page < this.rangeSize) {
+      rangeEnd = Math.min(this.rangeSize * 2, numPages - 1);
+    }
+
+    if (page > numPages - this.rangeSize) {
+      if (numPages < this.rangeSize) {
+        rangeStart = 0;
+      } else {
+        rangeStart = Math.max(numPages - this.rangeSize * 2, this.rangeSize);
+      }
+    }
+
+
+    for (let i = rangeStart; i < rangeEnd + 1; i++) {
       navs.push({
         text: (i + 1).toString(),
         current: i === page,

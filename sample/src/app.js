@@ -1,8 +1,4 @@
-const data = [];
-
-for (let i = 0; i < 100; i++) {
-  data.push({ key: 0, value: i });
-}
+const numPages = 20;
 
 export class App {
   constructor() {
@@ -10,16 +6,16 @@ export class App {
   }
 
   getItems({ page = 0, pageSize = 10 }) {
-    const maxPage = Math.max(Math.floor(data.length / pageSize) - 1, 0);
+    return fetch(`https://api.imgur.com/3/gallery/hot/viral/${page}.json`, {
+      headers: {
+        'Authorization': 'Client-ID c8e140c5402bbb8'
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        const data = result.data.filter(i => !i.is_album).slice(0, pageSize);
 
-    if (page > maxPage || page < 0) {
-      return null;
-    }
-
-    const startIndex = pageSize * page;
-    const endIndex = Math.min(startIndex + pageSize, data.length);
-    const pageData = data.slice(startIndex, endIndex);
-
-    return { data: pageData, maxPage };
+        return { data, numPages };
+      });
   }
 }

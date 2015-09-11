@@ -1,4 +1,5 @@
-import 'github:twbs/bootstrap@3.3.5';
+import 'github:twbs/bootstrap@3.3.5/css/bootstrap.css!';
+import 'whatwg-fetch';
 
 export function configure(aurelia) {
   aurelia.use

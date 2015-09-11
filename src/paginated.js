@@ -14,7 +14,7 @@ export class PaginatedElement {
   @bindable page = 0;
 
   data = [];
-  model = { ready: false, maxPage: 0 };
+  model = { ready: false, numPages: 0 };
 
   constructor(viewResources, viewSlot, viewCompiler, container, element) {
     this[_ready] = false;
@@ -83,13 +83,13 @@ export class PaginatedElement {
 
     this.model.ready = false;
     Promise.resolve(this.fetch({ $page: this.page, $pageSize: this.pageSize }))
-      .then(({ data, maxPage }) => {
+      .then(({ data, numPages }) => {
         if (counter !== this[_counter]) {
           return;
         }
 
         this.data = data;
-        this.model.maxPage = maxPage;
+        this.model.numPages = numPages;
         this.model.ready = true;
       });
   }
