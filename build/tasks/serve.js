@@ -8,7 +8,7 @@ var consts = require('../consts');
 // this task utilizes the browsersync plugin
 // to create a dev server instance
 // at http://localhost:9000
-gulp.task('serve', ['build'], function(done) {
+gulp.task('serve', ['build', 'build-sample'], function(done) {
   var bs = browserSync.create(consts.browserSyncName);
 
   bs.init({
@@ -16,6 +16,7 @@ gulp.task('serve', ['build'], function(done) {
       baseDir: paths.sample,
       routes: {
         '/aurelia-pagination': path.join(paths.output, 'amd'),
+        '/app': path.join(paths.output, 'sample', 'app')
       },
     },
   }, done);

@@ -51,6 +51,17 @@ gulp.task('build-system', ['build-html-system'], function() {
     .pipe(gulp.dest(path.join(paths.output, 'system')));
 });
 
+gulp.task('build-html-sample', ['build'], function() {
+  return gulp.src(paths.sampleHtml)
+    .pipe(gulp.dest(path.join(paths.output, 'sample', 'app')));
+});
+
+gulp.task('build-sample', ['build', 'build-html-sample'], function() {
+  return gulp.src(paths.sampleSource)
+    .pipe(babel(Object.assign({}, compilerOptions, { modules: 'amd' })))
+    .pipe(gulp.dest(path.join(paths.output, 'sample', 'app')));
+});
+
 // gulp.task('build-css', function() {
 //   return gulp.src(paths.less)
 //     .pipe(less(lessSettings))

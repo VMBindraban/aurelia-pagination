@@ -17,6 +17,7 @@
   "homepage": "https://github.com/YoloDev/aurelia-pagination#readme",
   "description": "",
   "devDependencies": {
+    "aurelia-bundler": "^0.1.6",
     "babel-eslint": "^4.1.1",
     "browser-sync": "^2.9.3",
     "core-js": "^1.1.4",
