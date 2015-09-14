@@ -5,6 +5,7 @@ set -e # exit with nonzero exit code if anything fails
 
 if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
   pushd dist/sample
+  sed -i -e 's/baseURL: "\/"/baseURL: "\/aurelia-pagination\/"/' config.js
   git init
 
   # inside this git repo we'll pretend to be a new user
