@@ -5,7 +5,7 @@ var path = require('path');
 var paths = require('../paths')
 
 gulp.task('init', shell.task([
-  '"' + path.join(process.cwd(), 'node_modules', '.bin', 'jspm') + '" install'
+  '"' + path.join(process.cwd(), 'node_modules', '.bin', 'jspm') + '" install -y'
 ], {
   cwd: path.join(process.cwd(), paths.sample)
 }));

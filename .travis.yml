@@ -4,7 +4,7 @@ node_js:
 - 'node'
 before_install:
 - npm install -g jspm
-- jspm config endpoints.github.auth $JSPM_GITHUB_AUTH_TOKEN
+- jspm config endpoints.github.auth $JSPM_GITHUB_AUTH_TOKEN -y
 install:
 - npm install
 - gulp init
@@ -13,8 +13,3 @@ script:
 after_success:
 - gulp dist
 - "./deploy.sh"
-env:
-  global:
-  - GH_REPO: YoloDev/aurelia-pagination.git
-    secure: SuuSoDjy0OKI3XQoSCInuXSrh0L7fiGr3yS9Hl8LH1PEVmhzBMH++BZjT32780RfGagQ0GZjGInL6o39kKa3NPWnEJMA6/sADGX/WP/bykBh4hiRC0oI+jOL4v3mj+rSlrnvZY0th0ebGcJpHv52aLiWplvPn8DNL3kOW82uyKelU9hvsy/3qOc4aLu9IYF1gweAJHmZXhz3uaOlpB0LhA6zXZtJgd3muGwz3nnNjg3rMUKMEff/vFWag4NrvJtOMFAgs0GZ4Rb5MtaiN69rDrCL7nRhUjpmaJB0vChEwMEa5PqHVINwggpNxHXrC6ZSLvQEV0kg3ogS+x3G31SqdZ8UVCfQkq/5qWaO7EjCm/MzzGACBM+pjq3B257WPCCc50sUAXAWgiqPKBb104p9VdjrGRl8cA/DaU3lsmEM56mQVI1RMWqj6cjqP7cgRo+nZ0JHxKNXj09fhGNMlvOzW6gCIXZEajXO3IG17SPW3SWf74HGP5icH1jwF8Okf67uEvE8FuW9nx7EfLCR8IrIHw7pkZ81nrbGUm3QSj6KpYgldYLXLUX3ya904d/nzC3DXgIJGf2XvxBAqY1eBI+cEHpJm87eLk/+OnHjjDBVU2YHYFtB7u/KcCVdMluemeah+AMN0HmrsLduUOMMkhbN1OTS3qQzr+aG5faHbaBwx9s=
-  - secure: rJ4FLDC9RQT8TGAYK0c/SwNmvvcKr9lHDaptd3vHO0AmfypctS6qHoy3gia/cVkgd+rDjAfzQNCDspStW9QUHKFZHGSRwrGZESJoSazjuvvn64Kp5jQ82DEP0GsO1JUF5DXi8TJ8wq+1C/lhf6mvuVdP0ITZgXGPFjCcwVyPbFU9t0xatw2elZTeiczwFqKPIl5E453jJ3lfXuDGQVlCXL3y2C1Dgy2PW2RVdELwHb65k0aJVi2M4L1/I8BdJbjqpmyATi/mDJPkcCqUseOo+f2QCDse2gSMywDYfEoggOhtcNiquFknVRWIX4mLq+KC0FFkn1+H5kOeZ/RbinYM+lq2S4Fv0B6Z86CBaoJqo6wvqi+Kzb/CQQsTksOxRJIS+1GOFtRVzX9D+RhdGesdp40IzrcOVWw1u/6atLGqpcklI8/uPqinJGimt0ikp68ii4uJuxRCo5Lxepn88sYi3wZdvVR3EnrwId1TFoL7O+uU2EJhy0crn5mvLiPcUXKroqxKD+fWtfBznOwZOVWRwLubtjJpBSWJ/U9q8enHd40qikGm1TKTEcRjYUse0y55ldcB4T60UZpt0l6oUF7eekbAfmspypw5rXT0ihO0QQH40fWUDMEf3y2qWqgyVXErONoaqcA/CjYnLteEFasuLNEvsVUg2LOgs3IhDFnYw8Y=
