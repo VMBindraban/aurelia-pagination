@@ -29,4 +29,3 @@ else
     echo "Skipping deployment because it's not master branch"
   fi
 fi
-

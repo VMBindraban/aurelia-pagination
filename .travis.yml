@@ -15,4 +15,5 @@ script:
 - gulp build # this should be gulp test eventually
 after_success:
 - gulp dist
+- "chmod +x ./deploy.sh"
 - "./deploy.sh"
