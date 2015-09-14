@@ -1,7 +1,7 @@
 language: node_js
 sudo: false
 node_js:
-- 'node'
+- node
 before_install:
 - npm install -g jspm
 - jspm config registries.github.remote https://github.jspm.io
@@ -12,8 +12,16 @@ install:
 - npm install
 - gulp init
 script:
-- gulp build # this should be gulp test eventually
+- gulp build
 after_success:
 - gulp dist
-- "chmod +x ./deploy.sh"
+- chmod +x ./deploy.sh
 - "./deploy.sh"
+deploy:
+  provider: npm
+  email: alxandr@alxandr.me
+  api_key:
+    secure: I360NzidVGuBTkbfMI6jqT+w+SX0/5Hrez0QUY9+MFrpsYLn9VFfHeSVUSGOe+Awdv5L8WeahT5BpJCuCTQxIWwbN6kRPski+5J558ki1GXEgaaBJ2+Nz6OHHJ5CE7PPNVYqARZnCnNRovLuQxEj9EFV1TM454wdVUQAY7hVKgD3RNDMaQq+w8QZHt4PRVYFLaqb8huBBL0W3sQ05mF/VLS79AFEMGKif2MUDxo5DzuyElxzkDfcXsYOCCPYT7bzrQrivqwFId8xRyo2S/SHNn44FpDYVHKOtb8GMXGN2cFZIQ3/WPdMNfKIR9gDTxNr8vxFVAzjZFvt4o/QkSKqT/HkvkDi6FdCVu4W88HT5ygmns1CLteI75yCsRrDdSSLeSxjld1iFEDGm4D2NqTc9EwkmwWwiiA1+C7pCisFOXRdmeeJ+O54dQ+CVNLk/0taaSFiuL3nHu3mYMQuiCZh7ok09VtuF1gx1cYXXLxYpLkWukO0JpocnN0Q8EdhKYMFMXJaeWv7Gst87t1RmnSAn4ByA85S3DS4M9ycHtOSE3I2n9qUhmA2JCOI1Lv3E7/7UKStbLXqMo6M/moqlXrPCJDxNID1Gv4SswwsWcjOIojd7Y3m10AVIm9tZtPHh0/xACjyQM0PGIUV0kb158VoXe7+yDlaPy6IyMgrrp3BFPQ=
+  on:
+    tags: true
+    repo: YoloDev/aurelia-pagination

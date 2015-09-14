@@ -1,7 +1,7 @@
 {
   "name": "aurelia-pagination",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.1",
+  "main": "dist/commonjs/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -41,6 +41,7 @@
     },
     "dependencies": {
       "aurelia-framework": "github:aurelia/framework@^0.16.0"
-    }
+    },
+    "jspmNodeConversion": false
   }
 }
