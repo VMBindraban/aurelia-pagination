@@ -40,7 +40,7 @@ export class PaginatedElement {
     this.viewSlot = viewSlot;
   }
 
-  reset({ resetPage = true }) {
+  reset({ resetPage = true } = {}) {
     if (resetPage) {
       this.page = 0;
     }

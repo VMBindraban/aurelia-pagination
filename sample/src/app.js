@@ -20,6 +20,6 @@ export class App {
   }
 
   reset() {
-    this.paginated.reset({ resetPage: true });
+    this.paginated.reset();
   }
 }
