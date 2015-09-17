@@ -6,7 +6,6 @@ export class App {
   }
 
   getItems({ page = 0, pageSize = 10 }) {
-    console.log('Hello');
     return fetch(`https://api.imgur.com/3/gallery/hot/viral/${page}.json`, {
       headers: {
         'Authorization': 'Client-ID c8e140c5402bbb8'
@@ -18,5 +17,9 @@ export class App {
 
         return { data, numPages };
       });
+  }
+
+  reset() {
+    this.paginated.reset({ resetPage: true });
   }
 }

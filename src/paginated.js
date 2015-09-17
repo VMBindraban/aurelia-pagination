@@ -3,6 +3,7 @@ import { customElement, processContent, bindable, noView, ViewSlot,
 
 const _ready = Symbol('ready');
 const _counter = Symbol('counter');
+const _prev = Symbol('prev');
 
 @noView()
 @processContent(false)
@@ -37,6 +38,15 @@ export class PaginatedElement {
     this.viewFactory = viewCompiler.compile(fragment, viewResources);
     this.container = container;
     this.viewSlot = viewSlot;
+  }
+
+  reset({ resetPage = true }) {
+    if (resetPage) {
+      this.page = 0;
+    }
+
+    this[_prev] = 0;
+    this._process();
   }
 
   bind(ctx) {
@@ -79,10 +89,17 @@ export class PaginatedElement {
   }
 
   _process() {
+    const prev = this[_prev] || {};
+    if (prev.$page === this.page && prev.$pageSize === this.pageSize) {
+      return;
+    }
+
     const counter = ++this[_counter];
+    const next = { $page: this.page, $pageSize: this.pageSize };
+    this[_prev] = next;
 
     this.model.ready = false;
-    Promise.resolve(this.fetch({ $page: this.page, $pageSize: this.pageSize }))
+    Promise.resolve(this.fetch(next))
       .then(({ data, numPages }) => {
         if (counter !== this[_counter]) {
           return;
