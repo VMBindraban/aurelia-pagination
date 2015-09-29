@@ -1,5 +1,7 @@
 import { customElement, processContent, bindable, noView, ViewSlot,
-  ViewResources, ViewCompiler, inject, Container } from 'aurelia-framework';
+  ViewResources, ViewCompiler, inject, Container, ObserverLocator } from 'aurelia-framework';
+
+import { createForwardLookup } from './utils';
 
 const _ready = Symbol('ready');
 const _counter = Symbol('counter');
@@ -8,7 +10,7 @@ const _prev = Symbol('prev');
 @noView()
 @processContent(false)
 @customElement('paginated')
-@inject(ViewResources, ViewSlot, ViewCompiler, Container, Element)
+@inject(ViewResources, ViewSlot, ViewCompiler, Container, ObserverLocator, Element)
 export class PaginatedElement {
   @bindable fetch;
   @bindable pageSize = 10;
@@ -17,13 +19,14 @@ export class PaginatedElement {
   data = [];
   model = { ready: false, numPages: 0 };
 
-  constructor(viewResources, viewSlot, viewCompiler, container, element) {
+  constructor(viewResources, viewSlot, viewCompiler, container, obsl, element) {
     this[_ready] = false;
     this[_counter] = 0;
+    this.createForwardLookup = createForwardLookup(obsl);
 
     Reflect.defineProperty(this.model, 'page', {
+      ...this.createForwardLookup(this, 'page'),
       enumerable: true,
-      get: () => this.page,
       set: value => this.page = value
     });
 
@@ -59,23 +62,10 @@ export class PaginatedElement {
       }
     }
 
-    const self = this;
     const childCtx = Object.create(ctx, {
-      $data: {
-        get() {
-          return self.data;
-        }
-      },
-      $model: {
-        get() {
-          return self.model;
-        }
-      },
-      $ready: {
-        get() {
-          return self.model.ready;
-        }
-      }
+      $data: this.createForwardLookup(this, 'data'),
+      $model: this.createForwardLookup(this, 'model'),
+      $ready: this.createForwardLookup(this, 'ready')
     });
 
     const view = this.viewFactory.create(this.container, childCtx);

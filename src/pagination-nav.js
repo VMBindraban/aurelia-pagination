@@ -1,5 +1,8 @@
 import { customElement, processContent, bindable, noView, ViewSlot,
-  ViewResources, ViewCompiler, inject, Container, ObserverLocator } from 'aurelia-framework';
+  ViewResources, ViewCompiler, inject, Container, ObserverLocator,
+  declarePropertyDependencies } from 'aurelia-framework';
+
+import { createForwardLookup, createForwardComputed } from './utils';
 
 @noView()
 @processContent(false)
@@ -13,6 +16,9 @@ export class PaginationNavElement {
   subscriptions = [];
 
   constructor(viewResources, viewSlot, viewCompiler, container, obsl, element) {
+    this.createForwardLookup = createForwardLookup(obsl);
+    this.createForwardComputed = createForwardComputed(obsl);
+
     const fragment = document.createDocumentFragment();
 
     let child;
@@ -37,13 +43,8 @@ export class PaginationNavElement {
       }
     }
 
-    const self = this;
     const childCtx = Object.create(ctx, {
-      $navs: {
-        get() {
-          return self.navs;
-        }
-      },
+      $navs: this.createForwardLookup(this, 'navs'),
       $go: {
         value: num => {
           if (typeof num === 'string') {
@@ -74,16 +75,8 @@ export class PaginationNavElement {
           }
         }
       },
-      $isLast: {
-        get() {
-          return self.model.page === self.model.numPages - 1;
-        }
-      },
-      $isFirst: {
-        get() {
-          return self.model.page === 0;
-        }
-      }
+      $isLast: this.createForwardComputed([[this, 'model', ['page', 'numPages']]], () => this.model.page === this.model.numPages - 1),
+      $isFirst: this.createForwardComputed([[this, 'model', 'page']], () => this.model.page === 0)
     });
 
     this.modelChanged();

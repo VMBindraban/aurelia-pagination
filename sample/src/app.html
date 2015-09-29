@@ -9,11 +9,11 @@
       <paginated fetch.call="getItems({ page: $event.$page, pageSize: $event.$pageSize })" paginated.ref="paginated" page-size="12">
         <div class="row">
           <div class="col-md-3" style="height: 25vh" repeat.for="img of $data">
-            <img src.bind="img.link" alt.bind="img.title" style="max-width: 100%; max-height: 25vh;"></img>
+            <img src.one-way="img.link" alt.one-way="img.title" style="max-width: 100%; max-height: 25vh;"></img>
           </div>
         </div>
 
-        <pagination-nav class="row" model.bind="$model" range-size="3">
+        <pagination-nav class="row" model.one-way="$model" range-size="3">
           <nav>
             <ul class="pagination">
               <li click.trigger="$go(0)"><a href="#" aria-label="First"><span aria-hidden="true">&laquo;</span></a></li>

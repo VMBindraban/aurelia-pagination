@@ -95,7 +95,7 @@
     "no-unneeded-ternary": 1,
     "no-unreachable": 1,
     "no-unused-expressions": 0,
-    "no-unused-vars": 1,
+    "no-unused-vars": [1, { "argsIgnorePattern": "^_" }],
     "no-use-before-define": 0,
     "no-useless-call": 1,
     "no-useless-concat": 1,
