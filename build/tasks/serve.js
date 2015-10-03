@@ -17,7 +17,7 @@ gulp.task('serve', ['build', 'build-sample'], function(done) {
       routes: {
         '/aurelia-pagination': path.join(paths.output, 'amd'),
         '/app': path.join(paths.output, 'sample', 'app')
-      },
-    },
+      }
+    }
   }, done);
 });

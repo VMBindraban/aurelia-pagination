@@ -6,7 +6,7 @@
       <h1>${title}</h1>
 
       <!-- This is ugly until https://github.com/aurelia/binding/issues/166 is fixed -->
-      <paginated fetch.call="getItems({ page: $event.$page, pageSize: $event.$pageSize })" paginated.ref="paginated" page-size="12">
+      <paginated controller.bind="controller" page-size="12">
         <div class="row">
           <div class="col-md-3" style="height: 25vh" repeat.for="img of $data">
             <img src.one-way="img.link" alt.one-way="img.title" style="max-width: 100%; max-height: 25vh;"></img>

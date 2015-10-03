@@ -1,8 +1,12 @@
+import { PaginationController } from 'aurelia-pagination';
+
 const numPages = 20;
 
 export class App {
   constructor() {
     this.title = 'Paginated!';
+
+    this.controller = new PaginationController(opts => this.getItems(opts));
   }
 
   getItems({ page = 0, pageSize = 10 }) {
@@ -20,6 +24,6 @@ export class App {
   }
 
   reset() {
-    this.paginated.reset();
+    this.controller.reset();
   }
 }

@@ -6,13 +6,14 @@ import { createForwardLookup } from './utils';
 const _ready = Symbol('ready');
 const _counter = Symbol('counter');
 const _prev = Symbol('prev');
+const _subscription = Symbol('subscription');
 
 @noView()
 @processContent(false)
 @customElement('paginated')
 @inject(ViewResources, ViewSlot, ViewCompiler, Container, ObserverLocator, Element)
 export class PaginatedElement {
-  @bindable fetch;
+  @bindable controller;
   @bindable pageSize = 10;
   @bindable page = 0;
 
@@ -48,7 +49,7 @@ export class PaginatedElement {
       this.page = 0;
     }
 
-    this[_prev] = 0;
+    this[_prev] = null;
     this._process();
   }
 
@@ -60,6 +61,12 @@ export class PaginatedElement {
       if (isNaN(this.pageSize)) {
         throw new Error(`The string '${pageSize}' given to page-size is not a number.`);
       }
+    }
+
+    if (this.controller) {
+      this[_subscription] = this.controller.subscribe(opts => this.reset(opts));
+    } else {
+      this[_subscription] = null;
     }
 
     const childCtx = Object.create(ctx, {
@@ -78,18 +85,36 @@ export class PaginatedElement {
     this._process();
   }
 
+  controllerChanged() {
+    if (this[_subscription]) {
+      this[_subscription]();
+      this[_subscription] = null;
+    }
+
+    if (this.controller) {
+      this[_subscription] = this.controller.subscribe(opts => this.reset(opts));
+    }
+  }
+
+  unbind() {
+    if (this[_subscription]) {
+      this[_subscription]();
+      this[_subscription] = null;
+    }
+  }
+
   _process() {
     const prev = this[_prev] || {};
-    if (prev.$page === this.page && prev.$pageSize === this.pageSize) {
+    if (prev.page === this.page && prev.pageSize === this.pageSize) {
       return;
     }
 
     const counter = ++this[_counter];
-    const next = { $page: this.page, $pageSize: this.pageSize };
+    const next = { page: this.page, pageSize: this.pageSize };
     this[_prev] = next;
 
     this.model.ready = false;
-    Promise.resolve(this.fetch(next))
+    Promise.resolve(this.controller && this.controller.getData(next) || [])
       .then(({ data, numPages }) => {
         if (counter !== this[_counter]) {
           return;
